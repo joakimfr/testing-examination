@@ -1,44 +1,67 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
 import ShowResult from './components/ShowResult/ShowResult'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from './components/Header/Header'
+
+
+
+
+import './App.scss'
 
 function App() {
   
   const [searchTerm, setSearchTerm] = useState('')
-console.log(searchTerm)
+  const [searchResult, setSearchResult] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('')
 
-const handleSearch = () => {
+console.log(searchResult)
 
-}
 
-async function getDictionary () {
+async function getDictionary() {
+
+  if (!searchTerm) {
+    setErrorMessage('Please enter a word before searching.');
+    return;
+  }
 
   const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`;
 
-  const response = await fetch(url)
+  try {
+    const response = await fetch(url);
 
-  const data = await response.json();
+    if (!response.ok) {
+      setErrorMessage('No results found. Please check your spelling and try again.'); 
+      return; 
+    }
 
-  console.log(data)
-
+    const data = await response.json();
+    console.log(data);
+    setSearchResult(data);
+    setErrorMessage('');
+  } catch (error) {
+    setErrorMessage('Please try again later.'); 
+  }
 }
 
 
   return (
     
-   <div>
-<SearchBar
-  searchTerm={searchTerm}
-  setSearchTerm={setSearchTerm}
-  getDictionary={getDictionary}
- />
- <ShowResult />
+   <div className='app'>
+   
+    <Header />
+    <SearchBar
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      getDictionary={getDictionary}
+    />
+  <p className='app__message' data-testid='error-message'>{errorMessage}</p>
+  <ShowResult
+    searchResult={searchResult}
+  />
 
-   </div>
-  )
+</div>
+)
+
 }
 
 export default App

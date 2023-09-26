@@ -1,0 +1,37 @@
+
+
+.searchbar {
+  margin-top: 100px;
+  display: flex;
+
+  &__input {
+    width: 200px;
+    font-family: 'Quicksand', sans-serif;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  &__button {
+    height: 40px;
+    width: 40px;
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button:hover {
+    background-color: #0056b3;
+  }
+
+  &__icon {
+    font-size: 20px;
+  }
+
+}
