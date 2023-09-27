@@ -2,8 +2,6 @@ import SearchBar from "../src/components/SearchBar/SearchBar";
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
   
-
-
 describe('SearchBar elements', () => {  
   it('should render an input element', () => {
     render(<SearchBar />);
