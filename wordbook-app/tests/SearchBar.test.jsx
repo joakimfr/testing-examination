@@ -37,5 +37,4 @@ describe('Interraction', () => {
     expect(getDictionary).toHaveBeenCalled();
   });
 
-  
 });
