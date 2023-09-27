@@ -2,10 +2,6 @@ import { useState, useEffect } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
 import ShowResult from './components/ShowResult/ShowResult'
 import Header from './components/Header/Header'
-
-
-
-
 import './App.scss'
 
 function App() {
@@ -13,9 +9,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResult, setSearchResult] = useState([]);
   const [errorMessage, setErrorMessage] = useState('')
-
-console.log(searchResult)
-
 
 async function getDictionary() {
 
@@ -43,25 +36,20 @@ async function getDictionary() {
   }
 }
 
-
   return (
-    
-   <div className='app'>
-   
+    <div className='app'>
     <Header />
     <SearchBar
-      searchTerm={searchTerm}
+      searchTerm={searchTerm} //skickar med searchTerm för att kunna uppdatera den i min komponent som har ett inputfield
       setSearchTerm={setSearchTerm}
       getDictionary={getDictionary}
     />
-  <p className='app__message' data-testid='error-message'>{errorMessage}</p>
-  <ShowResult
-    searchResult={searchResult}
-  />
-
-</div>
+      <p className='app__message' data-testid='error-message'>{errorMessage}</p>
+    <ShowResult
+      searchResult={searchResult}
+    />
+  </div>
 )
-
 }
 
 export default App

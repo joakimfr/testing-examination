@@ -11,21 +11,20 @@ function ShowResult ({ searchResult }) {
 
   const apiPhonetics = (phonetics) => (
     <div className='phonetics'>
-   
-    <ul className='phonetics__ul'>
-      {phonetics.map((phonetic, index) => (
-        <li className='phonetics__li' key={index}>
-          {phonetic.text}
-          {phonetic.audio && (
-            <audio className='phonetics__audio' controls key={phonetic.text}>
-              <source src={phonetic.audio} type="audio/mpeg" />
-            </audio>
-          )}
-        </li>
-      ))}
-    </ul>
-  </div>
-  )
+      <ul className='phonetics__ul'>
+        {phonetics.map((phonetic, index) => (
+          <li className='phonetics__li' key={index}>
+            {phonetic.text}
+            {phonetic.audio && (
+              <audio data-testid='audio' className='phonetics__audio' controls key={phonetic.text}>
+                <source src={phonetic.audio} type="audio/mpeg" />
+              </audio>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   const apiMeanings = (meanings) => (
     <div className='meanings'>
@@ -42,29 +41,22 @@ function ShowResult ({ searchResult }) {
       ))}
     </ul>
   </div>
-  )
+);
 
-
-  return (
-<div className='showresult'>
-{searchResult.length === 0 ? (
-      <p className='showresult__text'>Discover the meaning of words by typing and pressing the button.</p>
-    ) : null}
-{searchResult.map((result, index) => (
-        <div className='showresult__container' key={index}>
-          {apiMainInfo(result)}
-          {result.phonetics && apiPhonetics(result.phonetics)}
-          {result.meanings && apiMeanings(result.meanings)}
-        </div>
-      ))}
-
-
-
-</div>
-)
-
-
-
-}
+return (
+  <div className='showresult'>
+  {searchResult.length === 0 ? (
+        <p className='showresult__text'>Discover the meaning of words by typing and pressing the button.</p>
+      ) : null}
+    {searchResult.map((result, index) => (
+          <div className='showresult__container' key={index}>
+            {apiMainInfo(result)}
+            {result.phonetics && apiPhonetics(result.phonetics)}
+            {result.meanings && apiMeanings(result.meanings)}
+          </div>
+        ))}
+      </div>
+    )
+  }
 
 export default ShowResult
