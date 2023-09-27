@@ -1,5 +1,5 @@
 name: Linting and Testing
-#qq
+
 on: #this workflow runs on pull requests and pushes to main or master
   pull_request:
     branches: [main, master]
@@ -10,20 +10,19 @@ on: #this workflow runs on pull requests and pushes to main or master
 jobs:
   testing: #name of first job
     runs-on: ubuntu-latest #sets the env which this job runs on
+    defaults:
+      run:
+        working-directory: ./wordbook-app
     steps: #defines the steps necessary
       - name: Checkout #checks out our current branch so this runner has the latest code
-        working-directory: ./wordbook-app
         uses: actions/checkout@v4 #uses means that it is a pre-defined action supplied by GitHub.
       - name: Setup Node
-        working-directory: ./wordbook-app
         uses: actions/setup-node@v3 #this is also a pre-defined action
         with:
           node-version: 20
 
       - name: NPM Install #we now need to install all our dependencies in this environment
-        working-directory: ./wordbook-app
         run: npm ci #npm clean install - does not write to package.json
 
       - name: Run tests #if npm test throws and error this workflow fails.
-        working-directory: ./wordbook-app
         run: npm test
