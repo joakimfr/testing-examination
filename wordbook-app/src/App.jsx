@@ -18,6 +18,7 @@ function App() {
   const [searchResult, setSearchResult] = useState([]);
   const [errorMessage, setErrorMessage] = useState('')
 
+  
 async function getDictionary() {
 
   if (!searchTerm) {
