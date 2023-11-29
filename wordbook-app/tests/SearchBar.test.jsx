@@ -30,7 +30,7 @@ describe('Interraction', () => {
   
   it('should call getDictionary when the button is clicked', async () => {
     const getDictionary = vi.fn();
-    render(<SearchBar searchTerm='' setSearchTerm={() => {}} getDictionary={getDictionary} />);
+    render(<SearchBar getDictionary={getDictionary} />);
     const button = screen.getByRole('button');
 
     await userEvent.click(button);
